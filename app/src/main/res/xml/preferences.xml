@@ -1,4 +1,42 @@
-<?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <!--suppress AndroidElementNotAllowed -->
+    <android.support.v7.preference.SwitchPreferenceCompat
+        android:id="@+id/vibrate_switch_setting"
+        android:defaultValue="true"
+        android:key="vibrate_switch"
+        android:summary="Enable vibrate when alarm sounds."
+        android:title="Vibrate"/>
+    <Preference
+        android:id="@+id/ringtone_setting"
+        android:defaultValue="TYPE_NOTIFICATION"
+        android:key="ringtringtone_selectionone_preference_1"
+        android:ringtoneType="ringtone|notification|alarm|all"
+        android:summary="Select the Alarm Sound"
+        android:title="Ringtone preference"/>
+    <!--   <EditTextPreference
+          android:id="@+id/break_button_setting"
+          android:autoText="false"
+          android:defaultValue="30"
+          android:icon="@drawable/ic_30_min_break_black"
+          android:inputType="number|time"
+          android:key="30_min_button_setting"
+          android:numeric="integer"
+          android:selectAllOnFocus="true"
+          android:singleLine="true"
+          android:summary="Time for Break Button Alarm"
+          android:title="Break Button"/>
+      <EditTextPreference
+          android:id="@+id/rest_button_setting"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:autoText="false"
+          android:defaultValue="10"
+          android:icon="@drawable/ic_10_hour_black"
+          android:inputType="number|time"
+          android:key="10_hour_button_setting"
+          android:numeric="integer"
+          android:selectAllOnFocus="true"
+          android:singleLine="true"
+          android:summary="Time for Rest Button Alarm"
+          android:title="Rest Button"/>-->
 </PreferenceScreen>

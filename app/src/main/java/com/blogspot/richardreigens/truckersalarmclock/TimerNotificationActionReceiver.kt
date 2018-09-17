@@ -1,9 +1,8 @@
-package com
+package com.blogspot.richardreigens.truckersalarmclock
 
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import com.blogspot.richardreigens.truckersalarmclock.AlarmActivity
 import com.blogspot.richardreigens.truckersalarmclock.util.NotificationUtil
 import com.blogspot.richardreigens.truckersalarmclock.util.PrefUtil
 

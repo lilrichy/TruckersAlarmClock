@@ -1,12 +1,11 @@
-package com.blogspot.richardreigens.TruckersAlarmClock
+package com.blogspot.richardreigens.truckersalarmclock
 
 import android.os.Bundle
 import android.support.v7.preference.PreferenceFragmentCompat
-import com.blogspot.richardreigens.R
 
 
 class SettingsActivityFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        addPreferencesFromResource(R.xml.preferences)
+        setPreferencesFromResource(R.xml.preferences, rootKey)
     }
 }

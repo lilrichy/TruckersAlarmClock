@@ -1,4 +1,4 @@
-package com
+package com.blogspot.richardreigens.truckersalarmclock
 
 class AppConstants {
     companion object {
