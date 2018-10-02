@@ -9,6 +9,9 @@ class SettingsActivity : AppCompatActivity() {
     companion object {
         val KEY_VIBRATE_SWITCH = "vibrate_switch"
         val KEY_RINGTONE_SELECTION = "ringtone_selection"
+        val KEY_BREAK_BUTTON_SETTING = "break_button_setting"
+        val KEY_REST_BUTTON_SETTING = "rest_button_setting"
+
     }
 
 
