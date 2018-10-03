@@ -2,6 +2,10 @@
  * Copyright (c) Richard J Reigens / LiLRichy 2018
  */
 
+/*
+ * Copyright (c) Richard J Reigens / LiLRichy 2018
+ */
+
 package com.blogspot.richardreigens.truckersalarmclock
 
 import android.content.Intent
@@ -21,12 +25,12 @@ class SettingsActivityFragment : PreferenceFragmentCompat() {
     override fun onPreferenceTreeClick(preference: Preference): Boolean {
         if (preference.key.equals(SettingsActivity.KEY_RINGTONE)) {
             val intent = Intent(RingtoneManager.ACTION_RINGTONE_PICKER)
-            intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_NOTIFICATION)
+            intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_ALL)
             intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true)
-            intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, true)
-            intent.putExtra(RingtoneManager.EXTRA_RINGTONE_DEFAULT_URI, Settings.System.DEFAULT_NOTIFICATION_URI)
+            intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, false)
+            intent.putExtra(RingtoneManager.EXTRA_RINGTONE_DEFAULT_URI, Settings.System.DEFAULT_ALARM_ALERT_URI)
 
-            val existingValue = PrefUtil.getRingtonePreferenceValue(context) // TODO
+            val existingValue = PrefUtil.getRingtonePreferenceValue(context)
             if (existingValue != null) {
                 if (existingValue.isEmpty()) {
                     // Select "Silent"
