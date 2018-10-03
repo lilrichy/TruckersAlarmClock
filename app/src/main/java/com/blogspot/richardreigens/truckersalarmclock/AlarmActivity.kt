@@ -2,6 +2,10 @@
  * Copyright (c) Richard J Reigens / LiLRichy 2018
  */
 
+/*
+ * Copyright (c) Richard J Reigens / LiLRichy 2018
+ */
+
 package com.blogspot.richardreigens.truckersalarmclock
 
 import android.app.AlarmManager
@@ -81,8 +85,12 @@ class AlarmActivity : AppCompatActivity() {
             // Timer setting for break
             val settingsUtil = PreferenceManager.getDefaultSharedPreferences(this)
 
-            PrefUtil.setTimerLength(Integer.parseInt(settingsUtil.getString(
-                    SettingsActivity.KEY_BREAK_BUTTON_SETTING, "30")).toLong(), this)
+            //Check for null
+            if (settingsUtil.getString(SettingsActivity.KEY_BREAK_BUTTON_SETTING, "30") != "")
+                PrefUtil.setTimerLength(Integer.parseInt(settingsUtil.getString(
+                        SettingsActivity.KEY_BREAK_BUTTON_SETTING, "30")).toLong(), this)
+            else
+                PrefUtil.setTimerLength(30, this)
 
             setNewTimerLength()
 
@@ -117,6 +125,8 @@ class AlarmActivity : AppCompatActivity() {
             PrefUtil.setTimerLength(0, this)
             setNewTimerLength()
             onTimerFinished()
+            playAlarmSoundVibrate(false)
+            NotificationUtil.hideTimerNotification(this)
 
             updateButtons()
             updateCountdownUI()
@@ -128,8 +138,12 @@ class AlarmActivity : AppCompatActivity() {
             // Timer setting for rest
             val settingsUtil = PreferenceManager.getDefaultSharedPreferences(this)
 
-            PrefUtil.setTimerLength(Integer.parseInt(settingsUtil.getString(
-                    SettingsActivity.KEY_REST_BUTTON_SETTING, "600")).toLong() * 60, this)
+            //Check for null
+            if (settingsUtil.getString(SettingsActivity.KEY_BREAK_BUTTON_SETTING, "30") != "")
+                PrefUtil.setTimerLength(Integer.parseInt(settingsUtil.getString(
+                        SettingsActivity.KEY_REST_BUTTON_SETTING, "600")).toLong() * 60, this)
+            else
+                PrefUtil.setTimerLength(10 * 60, this)
 
             setNewTimerLength()
 
