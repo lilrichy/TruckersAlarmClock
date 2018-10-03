@@ -6,6 +6,10 @@
  * Copyright (c) Richard J Reigens / LiLRichy 2018
  */
 
+/*
+ * Copyright (c) Richard J Reigens / LiLRichy 2018
+ */
+
 package com.blogspot.richardreigens.truckersalarmclock
 
 import android.app.AlarmManager
@@ -59,7 +63,7 @@ class AlarmActivity : AppCompatActivity() {
     }
 
     //Set to true to display debug text usage: db("String to display")
-    private var debugText: Boolean = true
+    private var debugText: Boolean = false
 
     private var mp: MediaPlayer? = null
     private lateinit var notificationSound: Uri
