@@ -2,6 +2,10 @@
  * Copyright (c) Richard J Reigens / LiLRichy 2018
  */
 
+/*
+ * Copyright (c) Richard J Reigens / LiLRichy 2018
+ */
+
 apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
@@ -14,8 +18,8 @@ android {
         applicationId 'com.blogspot.richardreigens.truckersalarmclock'
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0.L-02"
+        versionCode 2
+        versionName "1.0.L-03-beta"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
