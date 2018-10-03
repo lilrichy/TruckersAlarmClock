@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<!--
+  ~ Copyright (c) Richard J Reigens / LiLRichy 2018
+  -->
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,12 +16,12 @@
         android:id="@+id/textView_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="@+id/progress"
@@ -27,67 +30,73 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="@+id/progress"
         app:layout_constraintTop_toTopOf="@+id/progress"
-        tools:text="99:99"/>
+        tools:text="99:99" />
 
     <TextView
         android:id="@+id/textView_30_min"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="8dp"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progress"
-        app:layout_constraintVertical_bias="0.15"
-        tools:text="00:30"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline"
+        tools:text="00:30" />
 
     <TextView
         android:id="@+id/textView_10_hour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progress"
-        app:layout_constraintVertical_bias="0.0"
-        tools:text="10:00"/>
+        app:layout_constraintTop_toTopOf="@+id/guideline"
+        tools:text="10:00" />
 
 
     <me.zhanghai.android.materialprogressbar.MaterialProgressBar
         android:id="@+id/progress"
         style="@style/Widget.MaterialProgressBar.ProgressBar"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_height="333dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:minHeight="365dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:minWidth="365dp"
+        android:minHeight="365dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.263" />
 
     <TextView
         android:id="@+id/textView_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_count"
-        tools:text="TextView"/>
+        app:layout_constraintTop_toTopOf="@+id/guideline"
+        tools:text="TextView" />
 
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="300dp" />
 </android.support.constraint.ConstraintLayout>
