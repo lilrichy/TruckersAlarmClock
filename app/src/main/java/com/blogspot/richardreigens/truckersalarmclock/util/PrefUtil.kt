@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) Richard J Reigens / LiLRichy 2018
+ */
+
 package com.blogspot.richardreigens.truckersalarmclock.util
 
 import android.content.Context
@@ -6,6 +10,21 @@ import com.blogspot.richardreigens.truckersalarmclock.AlarmActivity
 
 class PrefUtil {
     companion object {
+
+        private const val RINGTONE_SETTING = "com.blogspot.richardreigens.truckersalarmclock.ringtone_setting_id"
+
+        fun getRingtonePreferenceValue(context: Context): String? {
+            val preferences = PreferenceManager.getDefaultSharedPreferences(context)
+            return preferences.getString(RINGTONE_SETTING, "")
+        }
+
+        fun setRingtonePreferenceValue(string: String, context: Context) {
+            val editor = PreferenceManager.getDefaultSharedPreferences(context).edit()
+            editor.putString(RINGTONE_SETTING, string)
+            editor.apply()
+        }
+
+
 
         private const val TIMER_LENGTH_ID = "com.blogspot.richardreigens.truckersalarmclock.timer_length_id"
 

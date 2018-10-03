@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) Richard J Reigens / LiLRichy 2018
+ */
+
 apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
@@ -5,13 +9,13 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 28
     defaultConfig {
         applicationId 'com.blogspot.richardreigens.truckersalarmclock'
-        minSdkVersion 19
-        targetSdkVersion 26
+        minSdkVersion 21
+        targetSdkVersion 28
         versionCode 1
-        versionName "1.0.L-01"
+        versionName "1.0.L-02"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }

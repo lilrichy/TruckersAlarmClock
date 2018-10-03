@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) Richard J Reigens / LiLRichy 2018
+ */
+
 package com.blogspot.richardreigens.truckersalarmclock
 
 import android.app.AlarmManager
@@ -5,7 +9,6 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
-import android.media.RingtoneManager
 import android.net.Uri
 import android.os.*
 import android.support.v7.app.AppCompatActivity
@@ -21,8 +24,8 @@ import java.util.*
 
 class AlarmActivity : AppCompatActivity() {
     //TODO: Setup Notification with snooze button to add time to timer "maybe start new 5min timer???"
-    //TODO: Setting for picking alarm ringtone
     //TODO: Possibly Add 12/24 time selection option
+    //TODO: Possibly add option to set alarm in Android alarm clock based on time picked. Maybe by a long press on button.
 
     companion object {
         fun setAlarm(context: Context, nowSeconds: Long, secondsRemaining: Long): Long {
@@ -48,7 +51,7 @@ class AlarmActivity : AppCompatActivity() {
     }
 
     enum class TimerState {
-        Stopped, Paused, Running, Finished
+        Stopped, Paused, Running
     }
 
     //Set to true to display debug text usage: db("String to display")
@@ -71,8 +74,8 @@ class AlarmActivity : AppCompatActivity() {
 
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
 
-        notificationSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
-
+        notificationSound = Uri.parse(PrefUtil.getRingtonePreferenceValue(this))
+        //RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
 
         fab_30_min.setOnClickListener { v ->
             // Timer setting for break
@@ -86,7 +89,6 @@ class AlarmActivity : AppCompatActivity() {
             secondsRemaining = PrefUtil.getTimerLength(this) * 60
             updateCountdownUI()
 
-            //TODO debug text
             db("30 min Clicked!")
         }
 
@@ -98,7 +100,6 @@ class AlarmActivity : AppCompatActivity() {
             updateButtons()
             updateCountdownUI()
 
-            //TODO debug text
             db("Start Clicked!")
         }
 
@@ -109,7 +110,6 @@ class AlarmActivity : AppCompatActivity() {
             updateButtons()
             updateCountdownUI()
 
-            //TODO debug text
             db("Pause Clicked!")
         }
 
@@ -121,7 +121,6 @@ class AlarmActivity : AppCompatActivity() {
             updateButtons()
             updateCountdownUI()
 
-            //TODO debug text
             db("Cancel Clicked!")
         }
 
@@ -137,7 +136,6 @@ class AlarmActivity : AppCompatActivity() {
             secondsRemaining = PrefUtil.getTimerLength(this) * 60
             updateCountdownUI()
 
-            //TODO debug text
             db("10 hr Clicked!")
         }
         clocksTimer()
@@ -196,12 +194,9 @@ class AlarmActivity : AppCompatActivity() {
     private fun playAlarmSoundVibrate(soundMode: Boolean) {
         val settingsUtil = PreferenceManager.getDefaultSharedPreferences(this)
 
-        //Alarm Sound
-        //TODO: Update to setting to pick what sound to Play when finished
-        //TODO: Fix notification sound playing / wakeup?
-
+        //Alarm Sound Must edit here and in Notification.
         if (soundMode) {
-            mp = MediaPlayer.create(applicationContext, notificationSound)
+            mp = MediaPlayer.create(applicationContext, Uri.parse(PrefUtil.getRingtonePreferenceValue(this)))
             mp?.start()
 
             //Vibrate
@@ -218,9 +213,6 @@ class AlarmActivity : AppCompatActivity() {
             }
         } else {
             mp?.stop()
-            // mp?.release()
-
-            db("mp.stop???")
         }
     }
 
@@ -277,8 +269,8 @@ class AlarmActivity : AppCompatActivity() {
         val hours = secondsRemaining / 3600
         val minutes = (secondsRemaining % 3600) / 60
         val seconds = secondsRemaining % 60
-
         val timeString = String.format("%02d:%02d:%02d", hours, minutes, seconds)
+
         textView_count.text = timeString
         textView_status.text = timerState.toString()
         progress.progress = (timerLengthSeconds - secondsRemaining).toInt()
@@ -359,7 +351,7 @@ class AlarmActivity : AppCompatActivity() {
     }
 
     //Debug text displayed if debugText at top = true
-    fun db(message: String) {
+    private fun db(message: String) {
         if (debugText)
             println(message)
     }
