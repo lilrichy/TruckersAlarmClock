@@ -13,13 +13,14 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 26
     defaultConfig {
         applicationId 'com.blogspot.richardreigens.truckersalarmclock'
         minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 2
-        versionName "1.0.L-03-beta"
+        //noinspection OldTargetApi
+        targetSdkVersion 26
+        versionCode 4
+        versionName "1.0.L-04-beta"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
