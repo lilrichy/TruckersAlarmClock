@@ -2,10 +2,6 @@
  * Copyright (c) Richard J Reigens / LiLRichy 2018
  */
 
-/*
- * Copyright (c) Richard J Reigens / LiLRichy 2018
- */
-
 apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
