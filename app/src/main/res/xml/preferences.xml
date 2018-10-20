@@ -2,8 +2,11 @@
   ~ Copyright (c) Richard J Reigens / LiLRichy 2018
   -->
 
+<!--
+  ~ Copyright (c) Richard J Reigens / LiLRichy 2018
+  -->
+
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <!--suppress AndroidElementNotAllowed -->
     <PreferenceCategory android:title="Alarm Settings">
         <Preference
             android:id="@+id/ringtone_setting"
@@ -11,6 +14,8 @@
             android:ringtoneType="ringtone|notification|alarm|all"
             android:summary="Select the Alarm Sound"
             android:title="Ringtone preference" />
+
+        <!--suppress AndroidElementNotAllowed -->
         <android.support.v7.preference.SwitchPreferenceCompat
             android:id="@+id/vibrate_switch_setting"
             android:defaultValue="true"
@@ -28,8 +33,9 @@
             android:dialogMessage="Time in Minuets for Break button"
             android:digits="0123456789"
             android:icon="@drawable/ic_30_min_break_black"
-            android:inputType="number"
+            android:inputType="phone"
             android:key="break_button_setting"
+            android:maxLength="3"
             android:numeric="integer"
             android:selectAllOnFocus="true"
             android:singleLine="true"
@@ -45,7 +51,7 @@
             android:dialogMessage="Time in Hours for Rest button"
             android:digits="0123456789"
             android:icon="@drawable/ic_10_hour_black"
-            android:inputType="number"
+            android:inputType="phone"
             android:key="rest_button_setting"
             android:numeric="integer"
             android:selectAllOnFocus="true"

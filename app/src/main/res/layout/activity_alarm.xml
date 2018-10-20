@@ -7,6 +7,10 @@
   ~ Copyright (c) Richard J Reigens / LiLRichy 2018
   -->
 
+<!--
+  ~ Copyright (c) Richard J Reigens / LiLRichy 2018
+  -->
+
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -32,7 +36,7 @@
     <include layout="@layout/content_alarm" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_30_min"
+        android:id="@+id/fab_break"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
@@ -79,7 +83,7 @@
         app:srcCompat="@drawable/ic_alarm_off" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_10_hour"
+        android:id="@+id/fab_rest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"

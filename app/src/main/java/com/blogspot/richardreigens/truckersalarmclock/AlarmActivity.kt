@@ -2,14 +2,6 @@
  * Copyright (c) Richard J Reigens / LiLRichy 2018
  */
 
-/*
- * Copyright (c) Richard J Reigens / LiLRichy 2018
- */
-
-/*
- * Copyright (c) Richard J Reigens / LiLRichy 2018
- */
-
 package com.blogspot.richardreigens.truckersalarmclock
 
 import android.app.AlarmManager
@@ -23,6 +15,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.preference.PreferenceManager
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import com.blogspot.richardreigens.truckersalarmclock.util.NotificationUtil
 import com.blogspot.richardreigens.truckersalarmclock.util.PrefUtil
 import kotlinx.android.synthetic.main.activity_alarm.*
@@ -85,16 +78,18 @@ class AlarmActivity : AppCompatActivity() {
         notificationSound = Uri.parse(PrefUtil.getRingtonePreferenceValue(this))
         //RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
 
-        fab_30_min.setOnClickListener { v ->
+        fab_break.setOnClickListener { v ->
             // Timer setting for break
             val settingsUtil = PreferenceManager.getDefaultSharedPreferences(this)
 
-            //Check for null
-            if (settingsUtil.getString(SettingsActivity.KEY_BREAK_BUTTON_SETTING, "30") != "")
-                PrefUtil.setTimerLength(Integer.parseInt(settingsUtil.getString(
+            //Check for crash
+            try {
+                PrefUtil.setTimerLength(Integer.valueOf(settingsUtil.getString(
                         SettingsActivity.KEY_BREAK_BUTTON_SETTING, "30")).toLong(), this)
-            else
-                PrefUtil.setTimerLength(30, this)
+            } catch (e: Exception) {
+                Toast.makeText(applicationContext, "Break Button Setting Invalid! Must be number of minuets.", Toast.LENGTH_SHORT).show()
+                PrefUtil.setTimerLength(0, this)
+            }
 
             setNewTimerLength()
 
@@ -138,30 +133,34 @@ class AlarmActivity : AppCompatActivity() {
             db("Cancel Clicked!")
         }
 
-        fab_10_hour.setOnClickListener { v ->
+        fab_rest.setOnClickListener { v ->
             // Timer setting for rest
             val settingsUtil = PreferenceManager.getDefaultSharedPreferences(this)
 
-            //Check for null
-            if (settingsUtil.getString(SettingsActivity.KEY_BREAK_BUTTON_SETTING, "30") != "")
-                PrefUtil.setTimerLength(Integer.parseInt(settingsUtil.getString(
+            //Check for crash
+            try {
+                PrefUtil.setTimerLength(Integer.valueOf(settingsUtil.getString(
                         SettingsActivity.KEY_REST_BUTTON_SETTING, "600")).toLong() * 60, this)
-            else
-                PrefUtil.setTimerLength(10 * 60, this)
+            } catch (e: Exception) {
+                Toast.makeText(applicationContext, "Rest Button Setting Invalid! Must be number of Hours.", Toast.LENGTH_SHORT).show()
+                PrefUtil.setTimerLength(0, this)
+            }
 
             setNewTimerLength()
 
             secondsRemaining = PrefUtil.getTimerLength(this) * 60
             updateCountdownUI()
-
-            db("10 hr Clicked!")
         }
         clocksTimer()
     }
 
     override fun onResume() {
         super.onResume()
-        initTimer()
+        try {
+            initTimer()
+        } catch (e: Exception) {
+            Toast.makeText(applicationContext, "Timer not initialized. Check settings.", Toast.LENGTH_SHORT).show()
+        }
         removeAlarm(this)
         NotificationUtil.hideTimerNotification(this)
     }
@@ -297,25 +296,25 @@ class AlarmActivity : AppCompatActivity() {
     private fun updateButtons() {
         when (timerState) {
             TimerState.Running -> {
-                fab_30_min.isEnabled = false
+                fab_break.isEnabled = false
                 fab_start.isEnabled = false
                 fab_pause.isEnabled = true
                 fab_cancel.isEnabled = true
-                fab_10_hour.isEnabled = false
+                fab_rest.isEnabled = false
             }
             TimerState.Stopped -> {
-                fab_30_min.isEnabled = true
+                fab_break.isEnabled = true
                 fab_start.isEnabled = true
                 fab_pause.isEnabled = false
                 fab_cancel.isEnabled = true
-                fab_10_hour.isEnabled = true
+                fab_rest.isEnabled = true
             }
             TimerState.Paused -> {
-                fab_30_min.isEnabled = true
+                fab_break.isEnabled = true
                 fab_start.isEnabled = true
                 fab_pause.isEnabled = false
                 fab_cancel.isEnabled = true
-                fab_10_hour.isEnabled = true
+                fab_rest.isEnabled = true
             }
         }
     }
@@ -332,13 +331,15 @@ class AlarmActivity : AppCompatActivity() {
                         Thread.sleep(1000)
                         runOnUiThread {
                             val calAdd30min = Calendar.getInstance()
-                            //If to catch crash if nothing is entered in settings
-                            if (settingsUtil.getString(SettingsActivity.KEY_BREAK_BUTTON_SETTING, "30") != "")
-                                calAdd30min.add(Calendar.MINUTE, Integer.parseInt(
+                            //catch crash if wrong value is entered in settings
+                            try {
+                                calAdd30min.add(Calendar.MINUTE, Integer.valueOf(
                                         settingsUtil.getString(
                                                 SettingsActivity.KEY_BREAK_BUTTON_SETTING, "30")))
-                            else
-                                calAdd30min.add(Calendar.MINUTE, 1)
+                            } catch (e: Exception) {
+                                Toast.makeText(applicationContext, "Break Button Setting Invalid! Must be number of minuets.", Toast.LENGTH_SHORT).show()
+                                calAdd30min.add(Calendar.MINUTE, 0)
+                            }
 
                             //TODO: Update if/when 12/24 option gets implemented
                             //If 12 hour
@@ -347,13 +348,15 @@ class AlarmActivity : AppCompatActivity() {
                             // textView_30_min.text = dateFormat24.format(calAdd30min.time)
 
                             val calAdd10Hour = Calendar.getInstance()
-                            //If to catch crash if nothing is entered in settings
-                            if (settingsUtil.getString(SettingsActivity.KEY_REST_BUTTON_SETTING, "10") != "")
-                                calAdd10Hour.add(Calendar.HOUR, Integer.parseInt(
+                            //catch crash if wrong value is entered in settings
+                            try {
+                                calAdd10Hour.add(Calendar.HOUR, Integer.valueOf(
                                         settingsUtil.getString(
                                                 SettingsActivity.KEY_REST_BUTTON_SETTING, "600")))
-                            else
-                                calAdd10Hour.add(Calendar.HOUR, 10)
+                            } catch (e: Exception) {
+                                Toast.makeText(applicationContext, "Rest Button Setting Invalid! Must be number of hours.", Toast.LENGTH_SHORT).show()
+                                calAdd10Hour.add(Calendar.HOUR, 0)
+                            }
 
                             //If 12 hour
                             textView_10_hour.text = dateFormat12.format(calAdd10Hour.time)
