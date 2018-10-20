@@ -2,10 +2,6 @@
   ~ Copyright (c) Richard J Reigens / LiLRichy 2018
   -->
 
-<!--
-  ~ Copyright (c) Richard J Reigens / LiLRichy 2018
-  -->
-
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="Alarm Settings">
         <Preference
