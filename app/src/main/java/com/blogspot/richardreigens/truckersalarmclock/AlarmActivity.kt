@@ -68,7 +68,7 @@ class AlarmActivity : AppCompatActivity() {
         setContentView(R.layout.activity_alarm)
         setSupportActionBar(toolbar)
         supportActionBar?.setIcon(R.drawable.ic_timer)
-        supportActionBar?.title = "     Truckers Alarm Clock"
+        supportActionBar?.title = " Truckers Alarm Clock"
 
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
 
@@ -364,17 +364,31 @@ class AlarmActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    private inline fun consume(f: () -> Unit): Boolean {
+        f()
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> {
-                val intent = Intent(this, SettingsActivity::class.java)
-                startActivity(intent)
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
+
+        R.id.action_settings -> consume {
+            val intent = Intent(this, SettingsActivity::class.java)
+            startActivity(intent)
         }
+
+        R.id.menu_item_share -> consume {
+            val sharingIntent = Intent(android.content.Intent.ACTION_SEND)
+            sharingIntent.type = "text/plain"
+            val shareBodyText = "Check it out. Your message goes here"
+            sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject here")
+            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText)
+            startActivity(Intent.createChooser(sharingIntent, "Sharing Option"))
+            println("Share Clicked")
+            return true
+        }
+        else -> consume { super.onOptionsItemSelected(item) }
     }
 }

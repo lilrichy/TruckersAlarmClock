@@ -8,4 +8,10 @@
         android:title="@string/action_settings"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_settings"/>
+    <item
+        android:id="@+id/menu_item_share"
+        android:icon="@drawable/ic_share_24dp"
+        android:orderInCategory="200"
+        android:title="@string/share"
+        app:showAsAction="ifRoom" />
 </menu>
