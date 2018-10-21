@@ -55,9 +55,6 @@ class AlarmActivity : AppCompatActivity() {
         Stopped, Paused, Running
     }
 
-    //Set to true to display debug text usage: db("String to display")
-    private var debugText: Boolean = false
-
     private var mp: MediaPlayer? = null
     private lateinit var notificationSound: Uri
 
@@ -76,7 +73,6 @@ class AlarmActivity : AppCompatActivity() {
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
 
         notificationSound = Uri.parse(PrefUtil.getRingtonePreferenceValue(this))
-        //RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
 
         fab_break.setOnClickListener { v ->
             // Timer setting for break
@@ -87,7 +83,7 @@ class AlarmActivity : AppCompatActivity() {
                 PrefUtil.setTimerLength(Integer.valueOf(settingsUtil.getString(
                         SettingsActivity.KEY_BREAK_BUTTON_SETTING, "30")).toLong(), this)
             } catch (e: Exception) {
-                Toast.makeText(applicationContext, "Break Button Setting Invalid! Must be number of minuets.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, getString(R.string.break_setting_error), Toast.LENGTH_SHORT).show()
                 PrefUtil.setTimerLength(0, this)
             }
 
@@ -95,8 +91,6 @@ class AlarmActivity : AppCompatActivity() {
 
             secondsRemaining = PrefUtil.getTimerLength(this) * 60
             updateCountdownUI()
-
-            db("30 min Clicked!")
         }
 
         fab_start.setOnClickListener { v ->
@@ -106,8 +100,6 @@ class AlarmActivity : AppCompatActivity() {
             }
             updateButtons()
             updateCountdownUI()
-
-            db("Start Clicked!")
         }
 
         fab_pause.setOnClickListener { v ->
@@ -116,8 +108,6 @@ class AlarmActivity : AppCompatActivity() {
 
             updateButtons()
             updateCountdownUI()
-
-            db("Pause Clicked!")
         }
 
         fab_cancel.setOnClickListener { v ->
@@ -130,7 +120,6 @@ class AlarmActivity : AppCompatActivity() {
             updateButtons()
             updateCountdownUI()
 
-            db("Cancel Clicked!")
         }
 
         fab_rest.setOnClickListener { v ->
@@ -142,7 +131,7 @@ class AlarmActivity : AppCompatActivity() {
                 PrefUtil.setTimerLength(Integer.valueOf(settingsUtil.getString(
                         SettingsActivity.KEY_REST_BUTTON_SETTING, "600")).toLong() * 60, this)
             } catch (e: Exception) {
-                Toast.makeText(applicationContext, "Rest Button Setting Invalid! Must be number of Hours.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, getString(R.string.rest_setting_error), Toast.LENGTH_SHORT).show()
                 PrefUtil.setTimerLength(0, this)
             }
 
@@ -159,7 +148,7 @@ class AlarmActivity : AppCompatActivity() {
         try {
             initTimer()
         } catch (e: Exception) {
-            Toast.makeText(applicationContext, "Timer not initialized. Check settings.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, getString(R.string.timer_init_error), Toast.LENGTH_SHORT).show()
         }
         removeAlarm(this)
         NotificationUtil.hideTimerNotification(this)
@@ -237,10 +226,8 @@ class AlarmActivity : AppCompatActivity() {
         if (timerState == TimerState.Running) {
             playAlarmSoundVibrate(true)
             timer.cancel()
-            db("onTimerFinished running")
         } else {
             playAlarmSoundVibrate(false)
-            db("onTimerFinished else")
         }
 
         timerState = TimerState.Stopped
@@ -337,7 +324,7 @@ class AlarmActivity : AppCompatActivity() {
                                         settingsUtil.getString(
                                                 SettingsActivity.KEY_BREAK_BUTTON_SETTING, "30")))
                             } catch (e: Exception) {
-                                Toast.makeText(applicationContext, "Break Button Setting Invalid! Must be number of minuets.", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(applicationContext, getString(R.string.break_setting_error), Toast.LENGTH_SHORT).show()
                                 calAdd30min.add(Calendar.MINUTE, 0)
                             }
 
@@ -354,7 +341,7 @@ class AlarmActivity : AppCompatActivity() {
                                         settingsUtil.getString(
                                                 SettingsActivity.KEY_REST_BUTTON_SETTING, "600")))
                             } catch (e: Exception) {
-                                Toast.makeText(applicationContext, "Rest Button Setting Invalid! Must be number of hours.", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(applicationContext, getString(R.string.rest_setting_error), Toast.LENGTH_SHORT).show()
                                 calAdd10Hour.add(Calendar.HOUR, 0)
                             }
 
@@ -369,12 +356,6 @@ class AlarmActivity : AppCompatActivity() {
             }
         }
         t.start()
-    }
-
-    //Debug text displayed if debugText at top = true
-    private fun db(message: String) {
-        if (debugText)
-            println(message)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

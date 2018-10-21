@@ -58,5 +58,10 @@
 
     <PreferenceCategory android:title="About">
         <!--TODO: add Playstore Link, Share link?, Website info, Version info...-->
+        <Preference
+            android:key="about_button"
+            android:selectable="false"
+            android:summary="@string/app_version_with_version_text"
+            android:title="Truckers Alarm Clock" />
     </PreferenceCategory>
 </PreferenceScreen>

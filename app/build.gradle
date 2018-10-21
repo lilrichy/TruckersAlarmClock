@@ -10,18 +10,41 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 26
+
+    def versionMajor = 1
+    def versionMinor = 0
+    def versionPatch = 4
+
+    //L = laptop , D = Desktop
+    def pc = "L"
+    def releaseType = "beta"
+
+
     defaultConfig {
         applicationId 'com.blogspot.richardreigens.truckersalarmclock'
         minSdkVersion 21
         //noinspection OldTargetApi
         targetSdkVersion 26
-        versionCode 4
-        versionName "1.0.L-04-beta"
+
+        versionCode versionMajor * 10000 + versionMinor * 100 + versionPatch
+        versionName "${versionMajor}.${versionMinor}.${pc}-${versionPatch}-${releaseType}"
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
+        debug {
+            versionNameSuffix ".debug"
+            resValue "string", "app_version",
+                    "${defaultConfig.versionName}${versionNameSuffix}"
+            resValue "string", "app_version_with_version_text",
+                    "Version: ${defaultConfig.versionName}${versionNameSuffix}"
+        }
         release {
+            resValue "string", "app_version",
+                    "${defaultConfig.versionName}"
+            resValue "string", "app_version_with_version_text",
+                    "Version: ${defaultConfig.versionName}${versionNameSuffix}"
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
