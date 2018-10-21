@@ -382,11 +382,10 @@ class AlarmActivity : AppCompatActivity() {
         R.id.menu_item_share -> consume {
             val sharingIntent = Intent(android.content.Intent.ACTION_SEND)
             sharingIntent.type = "text/plain"
-            val shareBodyText = "Check it out. Your message goes here"
-            sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject here")
+            val shareBodyText = getString(R.string.share_app_advert)
+            sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Truckers Alarm Clock")
             sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText)
             startActivity(Intent.createChooser(sharingIntent, "Sharing Option"))
-            println("Share Clicked")
             return true
         }
         else -> consume { super.onOptionsItemSelected(item) }

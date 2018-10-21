@@ -3,14 +3,6 @@
   ~ Copyright (c) Richard J Reigens / LiLRichy 2018
   -->
 
-<!--
-  ~ Copyright (c) Richard J Reigens / LiLRichy 2018
-  -->
-
-<!--
-  ~ Copyright (c) Richard J Reigens / LiLRichy 2018
-  -->
-
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
     <background android:drawable="@color/ic_launcher_icon_bg" />
     <foreground android:drawable="@mipmap/ic_launcher_icon_fg" />
