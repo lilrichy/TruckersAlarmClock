@@ -64,13 +64,14 @@ class AlarmActivity : AppCompatActivity() {
     private var secondsRemaining: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_alarm)
         setSupportActionBar(toolbar)
         supportActionBar?.setIcon(R.drawable.ic_timer)
         supportActionBar?.title = " Truckers Alarm Clock"
 
-        PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
 
         notificationSound = Uri.parse(PrefUtil.getRingtonePreferenceValue(this))
 
