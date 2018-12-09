@@ -13,7 +13,7 @@ android {
 
     def versionMajor = 1
     def versionMinor = 0
-    def versionPatch = 5
+    def versionPatch = 6
 
     //L = laptop , D = Desktop
     def pc = "L"
@@ -22,7 +22,7 @@ android {
 
     defaultConfig {
         applicationId 'com.blogspot.richardreigens.truckersalarmclock'
-        minSdkVersion 21
+        minSdkVersion 24
         //noinspection OldTargetApi
         targetSdkVersion 26
 
@@ -41,6 +41,7 @@ android {
                     "Version: ${defaultConfig.versionName}${versionNameSuffix}"
         }
         release {
+            versionNameSuffix ".release"
             resValue "string", "app_version",
                     "${defaultConfig.versionName}"
             resValue "string", "app_version_with_version_text",
