@@ -25,6 +25,22 @@ class PrefUtil {
         }
 
 
+        private const val BREAK_CLOCK_ACTIVE = "com.blogspot.richardreigens.truckersalarmclock.break_clock_active_id"
+
+        fun getBreakClockActive(context: Context): Boolean {
+            val preferences = PreferenceManager.getDefaultSharedPreferences(context)
+            return preferences.getBoolean(BREAK_CLOCK_ACTIVE, true)
+        }
+
+        fun setBreakClockActive(boolean: Boolean, context: Context) {
+            val editor = PreferenceManager.getDefaultSharedPreferences(context).edit()
+            editor.putBoolean(BREAK_CLOCK_ACTIVE, boolean)
+            editor.apply()
+        }
+
+
+
+
 
         private const val TIMER_LENGTH_ID = "com.blogspot.richardreigens.truckersalarmclock.timer_length_id"
 

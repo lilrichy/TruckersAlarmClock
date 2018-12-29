@@ -8,6 +8,8 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.*
@@ -79,6 +81,7 @@ class AlarmActivity : AppCompatActivity() {
         fab_break.setOnClickListener { v ->
             // Timer setting for break
             val settingsUtil = PreferenceManager.getDefaultSharedPreferences(this)
+            PrefUtil.setBreakClockActive(true, this)
 
             //Check for crash
             try {
@@ -92,7 +95,10 @@ class AlarmActivity : AppCompatActivity() {
             setNewTimerLength()
 
             secondsRemaining = PrefUtil.getTimerLength(this) * 60
+            updateButtons()
             updateCountdownUI()
+
+
         }
 
         fab_start.setOnClickListener { v ->
@@ -127,6 +133,7 @@ class AlarmActivity : AppCompatActivity() {
         fab_rest.setOnClickListener { v ->
             // Timer setting for rest
             val settingsUtil = PreferenceManager.getDefaultSharedPreferences(this)
+            PrefUtil.setBreakClockActive(false, this)
 
             //Check for crash
             try {
@@ -140,7 +147,9 @@ class AlarmActivity : AppCompatActivity() {
             setNewTimerLength()
 
             secondsRemaining = PrefUtil.getTimerLength(this) * 60
+            updateButtons()
             updateCountdownUI()
+
         }
         clocksTimer()
     }
@@ -283,6 +292,16 @@ class AlarmActivity : AppCompatActivity() {
     }
 
     private fun updateButtons() {
+
+        if (PrefUtil.getBreakClockActive(this)) {
+            fab_break.backgroundTintList = ColorStateList.valueOf(Color.GREEN)
+            fab_rest.backgroundTintList = ColorStateList.valueOf(Color.BLUE)
+
+        } else {
+            fab_break.backgroundTintList = ColorStateList.valueOf(Color.BLUE)
+            fab_rest.backgroundTintList = ColorStateList.valueOf(Color.GREEN)
+        }
+
         when (timerState) {
             TimerState.Running -> {
                 fab_break.isEnabled = false
