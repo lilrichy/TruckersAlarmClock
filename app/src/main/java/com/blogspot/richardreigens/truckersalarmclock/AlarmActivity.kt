@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.preference.PreferenceManager
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import com.blogspot.richardreigens.truckersalarmclock.util.NotificationUtil
 import com.blogspot.richardreigens.truckersalarmclock.util.PrefUtil
@@ -286,21 +287,27 @@ class AlarmActivity : AppCompatActivity() {
             TimerState.Running -> {
                 fab_break.isEnabled = false
                 fab_start.isEnabled = false
+                fab_start.visibility = View.INVISIBLE
                 fab_pause.isEnabled = true
+                fab_pause.visibility = View.VISIBLE
                 fab_cancel.isEnabled = true
                 fab_rest.isEnabled = false
             }
             TimerState.Stopped -> {
                 fab_break.isEnabled = true
                 fab_start.isEnabled = true
+                fab_start.visibility = View.VISIBLE
                 fab_pause.isEnabled = false
+                fab_pause.visibility = View.INVISIBLE
                 fab_cancel.isEnabled = true
                 fab_rest.isEnabled = true
             }
             TimerState.Paused -> {
                 fab_break.isEnabled = true
                 fab_start.isEnabled = true
+                fab_start.visibility = View.VISIBLE
                 fab_pause.isEnabled = false
+                fab_pause.visibility = View.INVISIBLE
                 fab_cancel.isEnabled = true
                 fab_rest.isEnabled = true
             }
