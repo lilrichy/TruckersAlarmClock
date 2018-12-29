@@ -13,21 +13,20 @@ android {
 
     def versionMajor = 1
     def versionMinor = 0
-    def versionPatch = 6
+    def versionPatch = 7
 
     //L = laptop , D = Desktop
-    def pc = "L"
-    def releaseType = "beta"
+    def pc = "D"
 
 
     defaultConfig {
         applicationId 'com.blogspot.richardreigens.truckersalarmclock'
-        minSdkVersion 24
+        minSdkVersion 22
         //noinspection OldTargetApi
         targetSdkVersion 26
 
         versionCode versionMajor * 10000 + versionMinor * 100 + versionPatch
-        versionName "${versionMajor}.${versionMinor}.${pc}-${versionPatch}-${releaseType}"
+        versionName "${versionMajor}.${versionMinor}.${pc}-${versionPatch}"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true

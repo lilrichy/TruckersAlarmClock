@@ -92,7 +92,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline"
-        app:srcCompat="@drawable/ic_10_hour" />
+        app:srcCompat="@drawable/ic_local_hotel_24dp"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
