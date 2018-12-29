@@ -12,9 +12,9 @@
     <string name="timer_init_error">Timer not initialized. Check settings.</string>
 
 
-    <string name="download_url">https://play.google.com/store/apps/details?id=com.blogspot.richardreigens.truckersalarmclock</string>
+    <string name="download_url">http://bit.ly/TruckersAlarmClock</string>
     <string name="share">Share</string>
-    <string name="share_app_advert">Try out this new app to help you set your break and rest times easily! Download now on the play store: https://play.google.com/store/apps/details?id=com.blogspot.richardreigens.truckersalarmclock</string>
+    <string name="share_app_advert">Try out this new app to help you set your break and rest times easily! Download now on the play store: http://bit.ly/TruckersAlarmClock</string>
 
 
 </resources>
