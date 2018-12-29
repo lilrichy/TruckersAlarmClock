@@ -8,8 +8,6 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.content.res.ColorStateList
-import android.graphics.Color
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.*
@@ -294,12 +292,12 @@ class AlarmActivity : AppCompatActivity() {
     private fun updateButtons() {
 
         if (PrefUtil.getBreakClockActive(this)) {
-            fab_break.backgroundTintList = ColorStateList.valueOf(Color.GREEN)
-            fab_rest.backgroundTintList = ColorStateList.valueOf(Color.BLUE)
+            fab_break.backgroundTintList = resources.getColorStateList(R.color.colorAccent)
+            fab_rest.backgroundTintList = resources.getColorStateList(R.color.colorPrimary)
 
         } else {
-            fab_break.backgroundTintList = ColorStateList.valueOf(Color.BLUE)
-            fab_rest.backgroundTintList = ColorStateList.valueOf(Color.GREEN)
+            fab_break.backgroundTintList = resources.getColorStateList(R.color.colorPrimary)
+            fab_rest.backgroundTintList = resources.getColorStateList(R.color.colorAccent)
         }
 
         when (timerState) {
